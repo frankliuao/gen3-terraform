@@ -69,7 +69,34 @@ resource helm_release "argocd" {
 
   values = [
     <<-EOT
-    server.basehref: "/argocd/"
+    server:
+      basehref: "/argocd/"
+      tolerations:
+        - key: "eks.amazonaws.com/compute-type"
+          operator: "Equal"
+          value: "fargate"
+          effect: "NoSchedule"
+
+    controller:
+      tolerations:
+        - key: "eks.amazonaws.com/compute-type"
+          operator: "Equal"
+          value: "fargate"
+          effect: "NoSchedule"
+
+    repoServer:
+      tolerations:
+        - key: "eks.amazonaws.com/compute-type"
+          operator: "Equal"
+          value: "fargate"
+          effect: "NoSchedule"
+
+    redis:
+      tolerations:
+        - key: "eks.amazonaws.com/compute-type"
+          operator: "Equal"
+          value: "fargate"
+          effect: "NoSchedule"
     EOT
   ]
 }
@@ -90,10 +117,26 @@ resource helm_release "external-secrets" {
     serviceAccount:
       create: true
       name: external-secrets
+
     syncPolicy:
       automated:
         prune: true
         selfHeal: true
+
+    # Add tolerations under the chart components
+    controller:
+      tolerations:
+        - key: "eks.amazonaws.com/compute-type"
+          operator: "Equal"
+          value: "fargate"
+          effect: "NoSchedule"
+
+    webhook:
+      tolerations:
+        - key: "eks.amazonaws.com/compute-type"
+          operator: "Equal"
+          value: "fargate"
+          effect: "NoSchedule"
     EOT
   ]
 }

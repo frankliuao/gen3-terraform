@@ -12,7 +12,7 @@ data "aws_caller_identity" "current" {}
 terraform {
   backend "s3" {
     # The bucket to store the Terraform state file in.
-    bucket = "gen3hep" # Update to represent your environment
+    bucket = "gen3hep-east1" # Update to represent your environment
     # The location of the Terraform state file within the bucket. Notice the bucket has to exist beforehand.
     key = "gen3-commons/terraform.tfstate" # Update to represent your environment    
     encrypt = "true"
