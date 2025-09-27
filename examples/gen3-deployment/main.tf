@@ -72,7 +72,7 @@ locals {
 }
 
 module "commons" {
-  source = "git::github.com/uc-cdis/gen3-terraform.git//tf_files/aws/commons?ref=583279e2dcb403058a7dee239119e8a8fce0b43f"
+  source = "git::github.com/frankliuao/gen3-terraform.git//tf_files/aws/commons?ref=d051863be16cc940c8af1433e9ef2fc377d6f3df"
 
   vpc_name                       = local.vpc_name
   vpc_cidr_block                 = "10.10.0.0/20"
